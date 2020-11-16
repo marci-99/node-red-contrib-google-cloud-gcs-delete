@@ -1,0 +1,74 @@
+<script type="text/x-red" data-template-name="google-cloud-gcs-delete">
+    <div class="form-row">
+        <label for="node-input-account"><i class="fa fa-user"></i> Credentials</label>
+        <input type="text" id="node-input-account">        
+    </div>
+    <div class="form-row">
+        <label for="node-input-keyFilename"><i class="fa fa-user"></i> Key File</label>
+        <input type="text" id="node-input-keyFilename">
+    </div>  
+    <div class="form-row">
+        <label for="node-input-filename"><i class="fa fa-file"></i> File Name</label>
+        <input type="text" id="node-input-filename">
+    </div> 
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="google-cloud-gcs-delete">
+    <p>Read data from Google Cloud Storage.</p>
+    <h3>Inputs</h3>
+    <dl class="message-properties">
+        <dt>msg.filename
+            <span class="property-type">string</span>
+        </dt>
+        <dd>The name of the file in URL form.</dd>
+    </dl>
+    <h3>Outputs</h3>
+    <dl class="message-properties">
+        <dt>msg.payload
+            <span class="property-type">string</span>
+        </dt>
+        <dd>The payload read from the Google Cloud Storage object</dd>
+        <dt>msg.contenttype
+            <span class="property-type">string</span>
+        </dt>
+        <dd>The MIME content type of the object.</dd>
+    </dl>
+
+    <h3>Details</h3>
+    <p>This node can either read the contents of a file or list the files in a bucket.
+        If reading the contents of a file, <code>msg.filename</code> is the identity of the file to be read
+        from GCS.  If listing the contents of a bucket, <code>msg.filename</code> is the identity of the 
+        bucket to be listed.  The format of the file name is a URL string of the form
+        <code>gs://[BUCKET]/[FILENAME]</code>.  Alternatively, we can specify the file to be read in the file name configuration property.
+        If both this property and a runtime value found in <code>msg.filename</code> are present, then the <code>msg.filename</code> name will be used.
+    </p>
+    The metadata associated with the file is returned in <code>msg.metadata</code>.
+    </p>
+</script>
+
+<script type="text/javascript">
+
+RED.nodes.registerType("google-cloud-gcs-delete", {
+    category: "GCP",
+    defaults: {
+        account: { type: "google-cloud-credentials", required: false },
+        keyFilename: {value: "", required: false },
+        filename: { required: false },
+        list: { value: false, required: false},
+        name: { value: "", required: false }
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "gcs.png",
+    align: "left",
+    color: "#3FADB5",
+    label: function () {
+        return this.name || "gcs-delete";
+    },
+    paletteLabel: "gcs-delete"
+});
+</script>

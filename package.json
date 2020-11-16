@@ -1,0 +1,19 @@
+{
+  "name": "node-red-contrib-google-cloud-gcs-delete",
+  "version": "1.0.5",
+  "description": "Extends the node-red-contrib-google-cloud package by a Google Cloud Storage delete node.",
+  "main": "index.js",
+  "node-red": {
+    "nodes": {
+      "gcs-delete": "gcs-delete.js"
+    }
+  },
+  "keywords": [
+    "node-red"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@google-cloud/storage": "^5.5.0"
+  }
+}
